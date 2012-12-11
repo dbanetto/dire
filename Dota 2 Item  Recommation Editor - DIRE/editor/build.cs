@@ -80,7 +80,7 @@ namespace dire.editor
             write_start_regoin(fs);
 
             foreach (item i in g.items) {
-                fs.WriteLine(TabIndex() + "\"item\" \t\"" + i.ItemName + "\"");
+                fs.WriteLine(TabIndex() + "\"item\" \t\"item_" + i.ItemName + "\"");
             }
 
             write_end_regoin(fs);

@@ -43,8 +43,10 @@ namespace dire
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.CostLabel = new System.Windows.Forms.Label();
-            this.GListBox1 = new dire.GListBox();
             this.HeroNameLabel = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.GListBox1 = new dire.GListBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -69,10 +71,10 @@ namespace dire
             // richTextBox1
             // 
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.richTextBox1.Location = new System.Drawing.Point(17, 366);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 390);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(199, 83);
+            this.richTextBox1.Size = new System.Drawing.Size(204, 112);
             this.richTextBox1.TabIndex = 5;
             this.richTextBox1.Text = "";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
@@ -85,11 +87,12 @@ namespace dire
             this.tabControl1.Location = new System.Drawing.Point(222, 66);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(354, 391);
+            this.tabControl1.Size = new System.Drawing.Size(354, 444);
             this.tabControl1.TabIndex = 8;
             // 
             // button1
             // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Location = new System.Drawing.Point(469, 37);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(43, 23);
@@ -100,6 +103,7 @@ namespace dire
             // 
             // button2
             // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Location = new System.Drawing.Point(518, 37);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(58, 23);
@@ -165,6 +169,38 @@ namespace dire
             this.CostLabel.TabIndex = 13;
             this.CostLabel.Text = "Cost: 0";
             // 
+            // HeroNameLabel
+            // 
+            this.HeroNameLabel.AutoSize = true;
+            this.HeroNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HeroNameLabel.Location = new System.Drawing.Point(77, 27);
+            this.HeroNameLabel.Name = "HeroNameLabel";
+            this.HeroNameLabel.Size = new System.Drawing.Size(48, 20);
+            this.HeroNameLabel.TabIndex = 14;
+            this.HeroNameLabel.Text = "Hero";
+            // 
+            // button3
+            // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button3.Location = new System.Drawing.Point(12, 361);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(99, 23);
+            this.button3.TabIndex = 15;
+            this.button3.Text = "Add";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button4.Location = new System.Drawing.Point(122, 361);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(94, 23);
+            this.button4.TabIndex = 16;
+            this.button4.Text = "Remove";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // GListBox1
             // 
             this.GListBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -180,19 +216,11 @@ namespace dire
             this.GListBox1.SelectedIndexChanged += new System.EventHandler(this.GListBox1_SelectedIndexChanged);
             this.GListBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.GListBox1_MouseDoubleClick);
             // 
-            // HeroNameLabel
-            // 
-            this.HeroNameLabel.AutoSize = true;
-            this.HeroNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HeroNameLabel.Location = new System.Drawing.Point(77, 27);
-            this.HeroNameLabel.Name = "HeroNameLabel";
-            this.HeroNameLabel.Size = new System.Drawing.Size(48, 20);
-            this.HeroNameLabel.TabIndex = 14;
-            this.HeroNameLabel.Text = "Hero";
-            // 
             // main
             // 
-            this.ClientSize = new System.Drawing.Size(588, 469);
+            this.ClientSize = new System.Drawing.Size(588, 522);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.HeroNameLabel);
             this.Controls.Add(this.CostLabel);
             this.Controls.Add(this.pictureBox1);
@@ -233,6 +261,8 @@ namespace dire
         private PictureBox pictureBox1;
         private Label CostLabel;
         private Label HeroNameLabel;
+        private Button button3;
+        private Button button4;
     }
 
     #region GLListBox

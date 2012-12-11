@@ -74,7 +74,7 @@ namespace dire
             tabControl1.Controls.Add(b);
 
             Image pic = Image.FromFile(hero.ImagePathSmall);
-            this.HeroNameLabel.Text = hero.Name;
+            this.HeroNameLabel.Text = hero.Name + " - " + title;
             pictureBox1.Image = pic;
             //splashscreen.ChangeStatusText("Finished");
 
@@ -230,6 +230,38 @@ namespace dire
         private void main_FormClosed(object sender, FormClosedEventArgs e)
         {
             Caller.Visible = true;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                GListBoxItem b = (GListBoxItem)GListBox1.SelectedItem;
+
+                ListViewItem item = new ListViewItem(b.Text, b.ImageIndex);
+                BuildTab i = (BuildTab)this.tabControl1.SelectedTab;
+                i.AddItem(item);
+            }
+            catch { }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                BuildTab b = (BuildTab)tabControl1.SelectedTab;
+                foreach (ListViewItem i in b.ItemList.SelectedItems)
+                {
+                    b.Group.items.Remove(new item(ItemFetcher.AllItems[i.ImageIndex].Name, ItemFetcher.AllItems[i.ImageIndex].DotaName));
+                    b.ItemList.Items.Remove(i);
+                    b.Cost -= ItemFetcher.AllItems[i.ImageIndex].Cost;
+                    main.Build.UpdateCurrentCost();
+                }
+            }
+            catch
+            {
+                
+            }
         }
     }
 }
