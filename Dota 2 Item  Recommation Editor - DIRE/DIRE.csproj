@@ -62,6 +62,7 @@
     <Compile Include="gui\GLComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="gui\TabDragger.cs" />
     <Compile Include="HeroPicker.cs">
       <SubType>Form</SubType>
     </Compile>

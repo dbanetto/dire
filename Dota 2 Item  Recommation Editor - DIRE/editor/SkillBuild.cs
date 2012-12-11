@@ -9,5 +9,8 @@ namespace dire.editor
     {
         //See $STEAMAPPS/common/dota 2 beta/dota/guides/*.build
         //For new file format
+
+        
+
     }
 }

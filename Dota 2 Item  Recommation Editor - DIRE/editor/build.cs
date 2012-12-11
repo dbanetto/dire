@@ -30,17 +30,18 @@ namespace dire.editor
             if (File.Exists(file) && backup)
             {
                 //Backup file
-                File.Copy(file, file + "_"  + DateTime.UtcNow.ToString("H-mm--dd-MM-yy") + ".backup");
+                File.Copy(file, file + "_"  + DateTime.UtcNow.ToString("H-mm-dd-MM-yy") + ".backup");
             }
 
             StreamWriter fs = new StreamWriter (new FileStream(file , FileMode.Create));
 
             fs.AutoFlush = true;
 
+            fs.WriteLine("\"itembuilds/default_generic.txt\""); //Keeps the file to standard
             write_start_regoin(fs);
             fs.WriteLine(TabIndex() + "\"author\"		\"" + author + "\""); //author
             fs.WriteLine(TabIndex() + "\"hero\"  		\"" + hero + "\""); //hero
-            fs.WriteLine(TabIndex() + "\"Title\"			\"" + title + "\""); //title
+            fs.WriteLine(TabIndex() + "\"Title\"			\"" + title + "\"\n"); //title
             fs.WriteLine(TabIndex() + "\"Items\"");
                 write_start_regoin(fs); //items regoin
                 foreach (group g in items) //items

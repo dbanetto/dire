@@ -41,7 +41,7 @@ namespace dire
         }
 
         ListBox.ObjectCollection backup = new ListBox.ObjectCollection(null);
-
+        TabDragger tabDragger;
         private void main_Load(object sender, EventArgs e)
         {
             this.Visible = false;
@@ -76,6 +76,8 @@ namespace dire
             Image pic = Image.FromFile(hero.ImagePathSmall);
             this.HeroNameLabel.Text = hero.Name + " - " + title;
             pictureBox1.Image = pic;
+
+            tabDragger = new TabDragger(tabControl1, TabDragBehavior.TabDragArrange);
             //splashscreen.ChangeStatusText("Finished");
 
             //splashThread.Abort();
@@ -262,6 +264,11 @@ namespace dire
             {
                 
             }
+        }
+
+        private void tabControl1_TabIndexChanged(object sender, EventArgs e)
+        {
+            UpdateCurrentCost();
         }
     }
 }
