@@ -137,8 +137,11 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TxtboxAuthor);
             this.Controls.Add(this.button1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "HeroPicker";
-            this.Text = "HeroPicker";
+            this.Text = "DIRE - Hero Picker";
             this.Load += new System.EventHandler(this.HeroPicker_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

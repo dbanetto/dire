@@ -4,23 +4,49 @@ using System.Linq;
 using System.Text;
 
 using System.IO;
+using dire.net;
 namespace dire.editor
 {
     public class build
     {
-        string hero = string.Empty, author = string.Empty, title = string.Empty;
+        Hero hero;
+        string author = string.Empty, title = string.Empty;
+
+        public string Title
+        {
+            get { return title; }
+            set { title = value; }
+        }
+
+        public string Author
+        {
+            get { return author; }
+            set { author = value; }
+        }
+
+        public Hero Hero
+        {
+            get { return hero; }
+            set { hero = value; }
+        }
         int tabIndex = 0;
         List<group> items = new List<group>();
 
-        public build(string Hero, string Author, string Title, List<group> Items)
+        public List<group> Items
         {
-            //What hero is it for
+            get { return items; }
+            set { items = value; }
+        }
+
+        public build(Hero Hero, string Author, string Title, List<group> Items)
+        {
+            //What Hero is it for
             hero = Hero;
             //Who made it
             author = Author;
             //Build Name
             title = Title;
-            //Build items and groups
+            //Build Items and groups
             this.items = Items;
         }
 
@@ -39,16 +65,16 @@ namespace dire.editor
 
             fs.WriteLine("\"itembuilds/default_generic.txt\""); //Keeps the file to standard
             write_start_regoin(fs);
-            fs.WriteLine(TabIndex() + "\"author\"		\"" + author + "\""); //author
-            fs.WriteLine(TabIndex() + "\"hero\"  		\"" + hero + "\""); //hero
-            fs.WriteLine(TabIndex() + "\"Title\"			\"" + title + "\"\n"); //title
+            fs.WriteLine(TabIndex() + "\"author\"		\"" + author + "\""); //Author
+            fs.WriteLine(TabIndex() + "\"hero\"  		\"" + "npc_dota_hero_" + hero + "\""); //Hero
+            fs.WriteLine(TabIndex() + "\"Title\"			\"" + title + "\"\n"); //Title
             fs.WriteLine(TabIndex() + "\"Items\"");
-                write_start_regoin(fs); //items regoin
-                foreach (group g in items) //items
+                write_start_regoin(fs); //Items regoin
+                foreach (group g in items) //Items
                 {
                     write_group(fs, g);
                 }
-                write_end_regoin(fs); //finished items
+                write_end_regoin(fs); //finished Items
             write_end_regoin(fs); //finished build
             fs.Flush();
             fs.Close();
@@ -92,10 +118,11 @@ namespace dire.editor
         public static build LoadBuild(string path)
         {
             string[] lines = File.ReadAllLines(path);
-            string Lhero = "", Lauthor = "", Ltitle = "";
+            Hero Lhero = null;
+            string Lauthor = "", Ltitle = "";
             List<group> Litems = new List<group>();
             group tempGroup = new group();
-            bool isItems = false; //is reading items
+            bool isItems = false; //is reading Items
             
 
             foreach (string s in lines)
@@ -117,7 +144,7 @@ namespace dire.editor
                         }
                         //Name of item Group
                         tempGroup = new group(); //init Group
-                        tempGroup.items = new List<item>(); //init items
+                        tempGroup.items = new List<item>(); //init Items
                         tempGroup.GroupTitle = s.TrimStart().Split('\"')[1];
 
                     }
@@ -143,7 +170,7 @@ namespace dire.editor
 
                 if (s.TrimStart().StartsWith("\"hero"))
                 {
-                    Lhero = s.Split('\"')[s.Split('\"').Length - 2];
+                    Lhero = HeroFetcher.ResloveDotaNameToHero( s.Split('\"')[s.Split('\"').Length - 2].Remove(0, 14) );
                     continue;
                 }
 

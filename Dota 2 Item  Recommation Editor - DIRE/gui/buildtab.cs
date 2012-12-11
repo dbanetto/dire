@@ -40,6 +40,15 @@ namespace dire.gui
 
             init();
         }
+
+        public BuildTab( group Group)
+            : base(Group.GroupTitle)
+        {
+            this.group = Group;
+
+            init();
+        }
+
         
         public BuildTab(string GroupName)
             : base(GroupName)

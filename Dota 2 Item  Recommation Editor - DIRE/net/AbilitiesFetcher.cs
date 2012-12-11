@@ -12,7 +12,7 @@ namespace dire.net
     {
         static string url = @"http://www.dota2.com/jsfeed/heropediadata?feeds=abilitydata&l=english";
 
-        //To do: get images (large and small) for each hero saved in /cache/heros/{hero}_abilities/{name}.png
+        //To do: get images (large and small) for each Hero saved in /cache/heros/{Hero}_abilities/{name}.png
         //Add ability to Hero
 
         public static void getAllIcons(bool ForceUpdate = false)
@@ -50,7 +50,7 @@ namespace dire.net
 
                 }
 
-                //Sort each ability to its hero
+                //Sort each ability to its Hero
                 foreach (Ability a in h)
                 {
                     foreach (Hero hero in HeroFetcher.AllHeros)

@@ -42,7 +42,7 @@ namespace dire.net
                     }
 
                     i.Value.DotaName = i.Key;
-                    i.Value.Abilities = new Ability[15]; //maximum number of abilities to one hero (Invoker)
+                    i.Value.Abilities = new Ability[15]; //maximum number of abilities to one Hero (Invoker)
                     h.Add(i.Value);
 
                 }
@@ -51,6 +51,29 @@ namespace dire.net
             catch
             {
             }
+        }
+        
+        public static string ResloveDotaNameToName(string DotaName)
+        {
+            foreach (Hero i in AllHeros)
+            {
+                if (i.DotaName == DotaName)
+                {
+                    return i.Name;
+                }
+            }
+            throw new Exception("Hero " + DotaName + " does not exist.");
+        }
+        public static Hero ResloveDotaNameToHero(string DotaName)
+        {
+            foreach (Hero i in AllHeros)
+            {
+                if (i.DotaName == DotaName)
+                {
+                    return i;
+                }
+            }
+            throw new Exception("Hero " + DotaName + " does not exist.");
         }
         
     }

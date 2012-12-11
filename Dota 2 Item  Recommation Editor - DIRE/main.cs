@@ -34,23 +34,34 @@ namespace dire
              this.Caller = caller;
         }
 
-        public main()
+        public main(build build, HeroPicker caller)
         {
             InitializeComponent();
             Build = this;
+            this.LoadBuild(build);
+            this.Caller = caller;
+        }
+
+        public main(HeroPicker caller)
+        {
+            InitializeComponent();
+            Build = this;
+            this.Caller = caller;
         }
 
         ListBox.ObjectCollection backup = new ListBox.ObjectCollection(null);
         TabDragger tabDragger;
         private void main_Load(object sender, EventArgs e)
         {
+            //Hide while the startup happens
             this.Visible = false;
             backup = new ListBox.ObjectCollection(new ListBox());
 
-            //splashscreen.ChangeStatusText("Loading items icon list");
+            //splashscreen.ChangeStatusText("Loading Items icon list");
             ImageList i = new ImageList();
             i.ImageSize = new System.Drawing.Size(32, 24);
             
+            //Imageindex
             int n = 0;
              try
                 {
@@ -65,22 +76,24 @@ namespace dire
             }
                 catch { }
 
+            //Backup for searching
             backup.AddRange(GListBox1.Items);
             GListBox1.ImageList = i;
             BuildTab b = new BuildTab("Starting Items");
 
+            //Add ImageList to the tab
             b.ItemList.LargeImageList = i;
             b.ItemList.SmallImageList = i;
             tabControl1.Controls.Add(b);
 
+            //Change the Picture and text to match hero and build
             Image pic = Image.FromFile(hero.ImagePathSmall);
             this.HeroNameLabel.Text = hero.Name + " - " + title;
             pictureBox1.Image = pic;
 
+            //Enable Tad dragger
             tabDragger = new TabDragger(tabControl1, TabDragBehavior.TabDragArrange);
-            //splashscreen.ChangeStatusText("Finished");
 
-            //splashThread.Abort();
             this.Visible = true;
             
             this.Text = "DIRE - Build";
@@ -164,7 +177,7 @@ namespace dire
                 groups.Add(j.Group);
             }
 
-            dire.editor.build UserBuild = new build("npc_dota_hero_" + hero.DotaName, author, title, groups);
+            dire.editor.build UserBuild = new build(hero, author, title, groups);
             UserBuild.WriteBuild("default_" + hero.DotaName + ".txt");
         }
 
@@ -269,6 +282,27 @@ namespace dire
         private void tabControl1_TabIndexChanged(object sender, EventArgs e)
         {
             UpdateCurrentCost();
+        }
+
+        public void LoadBuild(build Build)
+        {
+            this.title = Build.Title;
+            this.hero = Build.Hero;
+            this.author = Build.Author;
+
+            Image pic = Image.FromFile(hero.ImagePathSmall);
+            this.HeroNameLabel.Text = hero.Name + " - " + title;
+            pictureBox1.Image = pic;
+
+            foreach (group g in Build.Items)
+            {
+                //Add item Groups
+                BuildTab b = new BuildTab(g);
+
+                b.ItemList.LargeImageList = this.GListBox1.ImageList;
+                b.ItemList.SmallImageList = this.GListBox1.ImageList;
+                tabControl1.Controls.Add(b);
+            }
         }
     }
 }
