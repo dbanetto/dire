@@ -79,12 +79,13 @@ namespace dire
             //Backup for searching
             backup.AddRange(GListBox1.Items);
             GListBox1.ImageList = i;
-            BuildTab b = new BuildTab("Starting Items");
-
-            //Add ImageList to the tab
-            b.ItemList.LargeImageList = i;
-            b.ItemList.SmallImageList = i;
-            tabControl1.Controls.Add(b);
+            
+            //Creating Default tabs
+            AddNewBuildtab("Starting Items");
+            AddNewBuildtab("Early Game");
+            AddNewBuildtab("Core");
+            AddNewBuildtab("Situational");
+            AddNewBuildtab("luxary");
 
             //Change the Picture and text to match hero and build
             Image pic = Image.FromFile(hero.ImagePathSmall);
@@ -222,10 +223,25 @@ namespace dire
             try
             {
                 BuildTab b = (BuildTab)tabControl1.SelectedTab;
-                this.CostLabel.Text = "Cost : " + b.Cost;
+
+                if (b.Cost != 0)
+                {
+                    this.CostLabel.Text = b.Group.GroupTitle + "'s Total Cost : " + b.Cost;
+                }
+                
+                int cost = 0;
+                foreach (TabPage i in this.tabControl1.TabPages)
+                {
+                    BuildTab j = (BuildTab)i;
+                    cost += j.Cost;
+                }
+                if (cost != 0)
+                {
+                    this.CostLabel.Text += " Total Build Cost : " + cost;
+                }
             }
             catch {
-                UpdateAllCost();
+                
             }
 
         }
@@ -238,7 +254,7 @@ namespace dire
                 BuildTab j = (BuildTab)i;
                 cost += j.Cost;
             }
-            this.CostLabel.Text = "Total Cost : " + cost;
+            this.CostLabel.Text += " Total Cost : " + cost;
 
         }
 
@@ -303,6 +319,21 @@ namespace dire
                 b.ItemList.SmallImageList = this.GListBox1.ImageList;
                 tabControl1.Controls.Add(b);
             }
+        }
+
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            UpdateCurrentCost();
+        }
+
+        private void AddNewBuildtab(string name)
+        {
+            BuildTab b = new BuildTab(name);
+
+            //Add ImageList to the tab
+            b.ItemList.LargeImageList = this.GListBox1.ImageList;
+            b.ItemList.SmallImageList = this.GListBox1.ImageList;
+            tabControl1.Controls.Add(b);
         }
     }
 }

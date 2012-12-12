@@ -66,7 +66,7 @@ namespace dire.editor
             fs.WriteLine("\"itembuilds/default_generic.txt\""); //Keeps the file to standard
             write_start_regoin(fs);
             fs.WriteLine(TabIndex() + "\"author\"		\"" + author + "\""); //Author
-            fs.WriteLine(TabIndex() + "\"hero\"  		\"" + "npc_dota_hero_" + hero + "\""); //Hero
+            fs.WriteLine(TabIndex() + "\"hero\"  		\"" + "npc_dota_hero_" + hero.DotaName + "\""); //Hero
             fs.WriteLine(TabIndex() + "\"Title\"			\"" + title + "\"\n"); //Title
             fs.WriteLine(TabIndex() + "\"Items\"");
                 write_start_regoin(fs); //Items regoin

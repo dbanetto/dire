@@ -90,6 +90,7 @@ namespace dire
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(354, 444);
             this.tabControl1.TabIndex = 8;
+            this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             this.tabControl1.TabIndexChanged += new System.EventHandler(this.tabControl1_TabIndexChanged);
             // 
             // button1
@@ -165,7 +166,7 @@ namespace dire
             // CostLabel
             // 
             this.CostLabel.AutoSize = true;
-            this.CostLabel.Location = new System.Drawing.Point(223, 47);
+            this.CostLabel.Location = new System.Drawing.Point(77, 47);
             this.CostLabel.Name = "CostLabel";
             this.CostLabel.Size = new System.Drawing.Size(40, 13);
             this.CostLabel.TabIndex = 13;
@@ -175,7 +176,7 @@ namespace dire
             // 
             this.HeroNameLabel.AutoSize = true;
             this.HeroNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HeroNameLabel.Location = new System.Drawing.Point(77, 27);
+            this.HeroNameLabel.Location = new System.Drawing.Point(76, 27);
             this.HeroNameLabel.Name = "HeroNameLabel";
             this.HeroNameLabel.Size = new System.Drawing.Size(48, 20);
             this.HeroNameLabel.TabIndex = 14;
