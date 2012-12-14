@@ -56,21 +56,22 @@ namespace dire.net
                     foreach (Hero hero in HeroFetcher.AllHeros)
                     {
                         //Check Hero in ability against Hero name in list
-                        if (a.HeroName == hero.Name)
+
+                        if (a.HeroName.Replace("_", " ").ToLower() == hero.Name.ToLower() || a.HeroName.ToLower() == hero.DotaName.ToLower() || a.DotaName.Contains(hero.DotaName))
                         {
                             a.DotaHeroName = hero.DotaName;
                             for (int i = 0; i < hero.Abilities.Length; i++)
                             {
-                                if (hero.Abilities[i] != null)
+                                if (hero.Abilities[i] == null)
                                 {
                                     //Put ability in free slot
                                     hero.Abilities[i] = a;
+                                    break;
                                 }
                             }
                         }
                     }
                 }
-
 
             }
             catch

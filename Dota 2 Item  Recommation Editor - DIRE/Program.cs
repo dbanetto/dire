@@ -31,7 +31,11 @@ namespace dire
             } while (cache.cache.updateinProgress);
             t.Join();
             splashscreen.Close();
+#if DEBUG
+            Application.Run(new SkillBuild());
+#else
             Application.Run(new HeroPicker());
+#endif
         }
         static Splash splashscreen;
         
