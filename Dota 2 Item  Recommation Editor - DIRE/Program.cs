@@ -11,14 +11,37 @@ namespace dire
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        /// 
+        public static bool UpdateJson = false;
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            bool forceUpdate = false;
+            bool updateJson = false;
+            foreach (string str in args)
+            {
+                if (str.ToLower() == "--force" || str.ToLower() == "-f")
+                {
+                    forceUpdate = true;
+                }
+                if (str.ToLower() == "--update" || str.ToLower() == "-u")
+                {
+                    UpdateJson = true;
+                }
+            }
 
             splashscreen = new Splash();
-            Thread t = new Thread(new ThreadStart(cache.cache.UpdateCache ));
+
+            Thread t;
+            if (forceUpdate)
+            {
+                t = new Thread(new ThreadStart(cache.cache.UpdateCacheForced));
+            }
+            else {
+                t = new Thread(new ThreadStart(cache.cache.UpdateCache));
+            }
             //Thread ui = new Thread(new ThreadStart( splashscreen.Show ));
             //ui.Start();
             splashscreen.Show();

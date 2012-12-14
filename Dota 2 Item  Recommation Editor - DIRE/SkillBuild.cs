@@ -43,6 +43,8 @@ namespace dire
             picBoxAbility2.Image = Image.FromFile("cache/abilities/" + hero.Abilities[1].DotaName + ".png");
             picBoxAbility3.Image = Image.FromFile("cache/abilities/" + hero.Abilities[2].DotaName + ".png");
             picBoxAbility4.Image = Image.FromFile("cache/abilities/" + hero.Abilities[3].DotaName + ".png");
+
+            
         }
     }
 }

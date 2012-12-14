@@ -21,7 +21,7 @@ namespace dire.net
             try
             {
                 string jsondata = string.Empty;
-                if (File.Exists("cache/abilities.json") && !ForceUpdate)
+                if (File.Exists("cache/abilities.json") && !ForceUpdate && !Program.UpdateJson)
                 {
                     jsondata = File.ReadAllText("cache/abilities.json");
                 }
