@@ -17,6 +17,10 @@ namespace dire
         public SkillBuild()
         {
             InitializeComponent();
+
+            HeroFetcher.GenerateObjects();
+            AbilitiesFetcher.GenerateObjects();
+
             hero = HeroFetcher.AllHeros[new Random().Next(0, HeroFetcher.AllHeros.Length)];
             //hero = HeroFetcher.ResloveDotaNameToHero("furion");
         }

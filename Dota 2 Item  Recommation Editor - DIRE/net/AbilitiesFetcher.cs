@@ -45,6 +45,25 @@ namespace dire.net
                         IconFetcher.downloadAbilityIcon(i.Key, "cache/abilities/" + i.Key + ".png");
                     }
 
+                    
+
+                }
+
+            }
+            catch
+            {
+            }
+        }
+
+        public static void GenerateObjects()
+        {
+            
+                string jsondata = File.ReadAllText("cache/abilities.json");
+              
+                var j = JsonConvert.DeserializeObject<Dictionary<string, Ability>>(jsondata);
+                List<Ability> h = new List<Ability>();
+                foreach (var i in j)
+                {
                     i.Value.DotaName = i.Key;
                     h.Add(i.Value);
 
@@ -74,11 +93,6 @@ namespace dire.net
                 }
 
             }
-            catch
-            {
-            }
-        }
-
     }
 
 

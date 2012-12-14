@@ -19,7 +19,7 @@ namespace dire
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             bool forceUpdate = false;
-            bool updateJson = false;
+            bool UpdateVerifyCache = false;
             foreach (string str in args)
             {
                 if (str.ToLower() == "--force" || str.ToLower() == "-f")
@@ -29,6 +29,10 @@ namespace dire
                 if (str.ToLower() == "--update" || str.ToLower() == "-u")
                 {
                     UpdateJson = true;
+                }
+                if (str.ToLower() == "--verify" || str.ToLower() == "-v")
+                {
+                    UpdateVerifyCache = true;
                 }
             }
 
@@ -40,7 +44,14 @@ namespace dire
                 t = new Thread(new ThreadStart(cache.cache.UpdateCacheForced));
             }
             else {
-                t = new Thread(new ThreadStart(cache.cache.UpdateCache));
+                if (UpdateVerifyCache)
+                {
+                    t = new Thread(new ThreadStart(cache.cache.UpdateVerifyCache));
+                }
+                else
+                {
+                     t = new Thread(new ThreadStart(cache.cache.UpdateCache));
+                }
             }
             //Thread ui = new Thread(new ThreadStart( splashscreen.Show ));
             //ui.Start();
@@ -55,7 +66,7 @@ namespace dire
             t.Join();
             splashscreen.Close();
 #if DEBUG
-            Application.Run(new SkillBuild());
+            Application.Run(new HeroPicker());
 #else
             Application.Run(new HeroPicker());
 #endif

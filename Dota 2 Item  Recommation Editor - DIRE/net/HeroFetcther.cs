@@ -21,7 +21,7 @@ namespace dire.net
             try
             {
                 string jsondata = string.Empty;
-                if (File.Exists("cache/heros.json") && !ForceUpdate)
+                if (File.Exists("cache/heros.json") && !ForceUpdate && !Program.UpdateJson)
                 {
                     jsondata = File.ReadAllText("cache/heros.json");
                 }
@@ -51,6 +51,25 @@ namespace dire.net
             catch
             {
             }
+        }
+
+        public static void GenerateObjects()
+        {
+                string jsondata = string.Empty;
+                jsondata = File.ReadAllText("cache/heros.json");
+
+
+                var j = JsonConvert.DeserializeObject<Dictionary<string, Hero>>(jsondata);
+                List<Hero> h = new List<Hero>();
+                foreach (var i in j)
+                {
+
+                    i.Value.DotaName = i.Key;
+                    i.Value.Abilities = new Ability[15]; //maximum number of abilities to one Hero (Invoker)
+                    h.Add(i.Value);
+
+                }
+                AllHeros = h.ToArray();
         }
         
         public static string ResloveDotaNameToName(string DotaName)

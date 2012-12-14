@@ -143,6 +143,7 @@
             this.Name = "HeroPicker";
             this.Text = "DIRE - Hero Picker";
             this.Load += new System.EventHandler(this.HeroPicker_Load);
+            this.VisibleChanged += new System.EventHandler(this.HeroPicker_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

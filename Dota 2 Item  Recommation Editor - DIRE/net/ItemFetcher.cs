@@ -50,6 +50,20 @@ namespace dire.net
             }
     }
 
+         public static void GenerateObjects()
+         {
+             string jsondata = string.Empty;
+             jsondata = File.ReadAllText("cache/items.json");
+
+                List<Item> items = new List<Item>();
+                var j = JsonConvert.DeserializeObject<Dictionary<string,Item>>(jsondata);
+                foreach (var i in j) {
+                    i.Value.DotaName = i.Key;
+                    items.Add(i.Value);
+                }
+                AllItems = items.ToArray();
+        }
+
         public static string ResloveDotaNameToName (string DotaName) {
             foreach (Item i in AllItems)
             {

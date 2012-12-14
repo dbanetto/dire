@@ -15,26 +15,26 @@ namespace dire
         public HeroPicker()
         {
             InitializeComponent();
-            ImageList heros = new ImageList();
+            //ImageList heros = new ImageList();
 
-            ImageList i = new ImageList();
-            i.ImageSize = new System.Drawing.Size(32, 18);
-            //glComboBox1.ItemHeight = 16;
+            //ImageList i = new ImageList();
+            //i.ImageSize = new System.Drawing.Size(32, 18);
+            ////glComboBox1.ItemHeight = 16;
 
-            int n = 0;
-            try
-            {
-                foreach (Hero it in HeroFetcher.AllHeros)
-                {
-                    i.Images.Add(it.Name, Image.FromFile("cache\\heros\\" + it.DotaName + "_sm.png"));
-                    glComboBox1.Items.Add(new dire.gui.GlComboBoxItem(it.Name, n));
-                    it.ImageListIndex = n;
-                    n++;
+            //int n = 0;
+            //try
+            //{
+            //    foreach (Hero it in HeroFetcher.AllHeros)
+            //    {
+            //        i.Images.Add(it.Name, Image.FromFile("cache\\heros\\" + it.DotaName + "_sm.png"));
+            //        glComboBox1.Items.Add(new dire.gui.GlComboBoxItem(it.Name, n));
+            //        it.ImageListIndex = n;
+            //        n++;
 
-                }
-            }
-            catch { }
-            glComboBox1.ImageList = i;
+            //    }
+            //}
+            //catch { }
+            //glComboBox1.ImageList = i;
 
             TxtboxAuthor.Text = Environment.UserName;
         }
@@ -65,10 +65,10 @@ namespace dire
         {
             try
             {
-                this.Visible = false;
+               
                 main m = new main(TxtboxAuthor.Text, txtBoxTitle.Text, HeroFetcher.AllHeros[glComboBox1.SelectedIndex], this);
                 m.Show();
-                //this.Close();
+                this.Visible = false;
             }
             catch { }
         }
@@ -82,6 +82,40 @@ namespace dire
             else if (txtBoxTitle.Text == "" || txtBoxTitle.Text == string.Empty || txtBoxTitle.Text == Environment.UserName + "'s " + HeroFetcher.AllHeros[glComboBox1.SelectedIndex].Name + " Build")
             {
                 autoGenTitle = true;
+            }
+        }
+
+        private void HeroPicker_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible)
+            {
+                HeroFetcher.GenerateObjects();
+
+                ImageList heros = new ImageList();
+
+                ImageList i = new ImageList();
+                i.ImageSize = new System.Drawing.Size(32, 18);
+                //glComboBox1.ItemHeight = 16;
+
+                int n = 0;
+                try
+                {
+                    foreach (Hero it in HeroFetcher.AllHeros)
+                    {
+                        i.Images.Add(it.Name, Image.FromFile("cache\\heros\\" + it.DotaName + "_sm.png"));
+                        glComboBox1.Items.Add(new dire.gui.GlComboBoxItem(it.Name, n));
+                        it.ImageListIndex = n;
+                        n++;
+
+                    }
+                }
+                catch { }
+                glComboBox1.ImageList = i;
+            }
+            else
+            {
+                this.glComboBox1.ImageList.Dispose();
+                this.glComboBox1.Items.Clear();
             }
         }
     }

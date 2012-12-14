@@ -53,13 +53,14 @@ namespace dire
         TabDragger tabDragger;
         private void main_Load(object sender, EventArgs e)
         {
+           
             //Hide while the startup happens
             this.Visible = false;
             backup = new ListBox.ObjectCollection(new ListBox());
 
             //splashscreen.ChangeStatusText("Loading Items icon list");
-            ImageList i = new ImageList();
-            i.ImageSize = new System.Drawing.Size(32, 24);
+            GListBox1.ImageList = new ImageList();
+            GListBox1.ImageList.ImageSize = new System.Drawing.Size(32, 24);
             
             //Imageindex
             int n = 0;
@@ -67,18 +68,20 @@ namespace dire
                 {
             foreach (Item it in ItemFetcher.AllItems)
             {
-                    i.Images.Add(it.Name, Image.FromFile("cache\\items\\" + it.DotaName + ".png"));
+                    GListBox1.ImageList.Images.Add(it.Name, Image.FromFile("cache\\items\\" + it.DotaName + ".png"));
                     GListBox1.Items.Add(new GListBoxItem(it.Name, n));
                     it.ImageListIndex = n;
                     n++;
                
             }
             }
-                catch { }
+                catch (Exception ex)
+             {
+                 MessageBox.Show("Error while loading files.");
+                }
 
             //Backup for searching
             backup.AddRange(GListBox1.Items);
-            GListBox1.ImageList = i;
             
             //Creating Default tabs
             AddNewBuildtab("Starting Items");
