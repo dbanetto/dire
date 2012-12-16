@@ -118,5 +118,21 @@ namespace dire
                 this.glComboBox1.Items.Clear();
             }
         }
+
+        private void loadBuildToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                try
+                {
+                    new main(editor.build.LoadBuild(openFileDialog.FileName), this).Show();
+                    this.Visible = false;
+                }
+                catch
+                {
+
+                }
+            }
+        }
     }
 }

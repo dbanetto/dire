@@ -71,6 +71,18 @@ namespace dire.net
                     return i.Name;
                 }
             }
+            //throw new Exception("Item " + DotaName + " does not exist.");
+            return null;
+        }
+        public static Item ResloveDotaNameToItem(string DotaName)
+        {
+            foreach (Item i in AllItems)
+            {
+                if (i.DotaName == DotaName)
+                {
+                    return i;
+                }
+            }
             throw new Exception("Item " + DotaName + " does not exist.");
         }
 

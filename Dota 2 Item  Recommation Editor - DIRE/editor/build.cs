@@ -103,11 +103,31 @@ namespace dire.editor
 
         private void write_group(StreamWriter fs, group g)
         {
+            //Noraml Text to DOTA Titles
+            if (g.GroupTitle == "Starting Items")
+            {
+                g.GroupTitle = "#DOTA_Item_Build_Starting_Items";
+            }
+            if (g.GroupTitle == "Early Game")
+            {
+                g.GroupTitle = "#DOTA_Item_Build_Early_Game";
+            }
+            if (g.GroupTitle == "Core Items")
+            {
+                g.GroupTitle = "#DOTA_Item_Build_Core_Items";
+            }
+            if (g.GroupTitle == "Luxury")
+            {
+                g.GroupTitle = "#DOTA_Item_Build_Luxury";
+            }
+            
             fs.WriteLine(TabIndex() + "\"" + g.GroupTitle + "\"");
+            
+            
             write_start_regoin(fs);
 
-            foreach (item i in g.items) {
-                fs.WriteLine(TabIndex() + "\"item\" \t\"item_" + i.ItemName + "\"");
+            foreach (Item i in g.items) {
+                fs.WriteLine(TabIndex() + "\"item\" \t\"item_" + i.DotaName + "\"");
             }
 
             write_end_regoin(fs);
@@ -132,58 +152,98 @@ namespace dire.editor
                     if (s.TrimStart().StartsWith("\"item"))
                     {
                         //Item found
-                        tempGroup.items.Add(new item("", s.Split('\"')[s.Split('\"').Length - 2]));
+                        tempGroup.items.Add(ItemFetcher.ResloveDotaNameToItem(s.Split('\"')[s.Split('\"').Length - 2].Remove(0, 5)));
 
                     }
                     else if (s.TrimStart().StartsWith("\"") && s.EndsWith("\""))
                     {
 
-                        if (tempGroup.GroupTitle != null)
+                        if (tempGroup.GroupTitle != null || tempGroup.items != null)
                         {
-                            Litems.Add(new group( tempGroup.items, tempGroup.GroupTitle));
+
+                            if (tempGroup.GroupTitle == "#DOTA_Item_Build_Starting_Items")
+                            {
+                                tempGroup.GroupTitle = "Starting Items";
+                            }
+                            if (tempGroup.GroupTitle == "#DOTA_Item_Build_Early_Game")
+                            {
+                                tempGroup.GroupTitle = "Early Game";
+                            }
+                            if (tempGroup.GroupTitle == "#DOTA_Item_Build_Core_Items")
+                            {
+                                tempGroup.GroupTitle = "Core Items";
+                            }
+                            if (tempGroup.GroupTitle == "#DOTA_Item_Build_Luxury")
+                            {
+                                tempGroup.GroupTitle = "Luxury";
+                            }
+
+
+                            Litems.Add(new group(tempGroup.items, tempGroup.GroupTitle));
                         }
                         //Name of item Group
                         tempGroup = new group(); //init Group
-                        tempGroup.items = new List<item>(); //init Items
+                        tempGroup.items = new List<Item>(); //init Items
                         tempGroup.GroupTitle = s.TrimStart().Split('\"')[1];
 
                     }
                     else
                     {
+                        if (s == "}" && tempGroup.GroupTitle != null) //EOF
+                        {
+                            if (tempGroup.GroupTitle == "#DOTA_Item_Build_Starting_Items")
+                            {
+                                tempGroup.GroupTitle = "Starting Items";
+                            }
+                            if (tempGroup.GroupTitle == "#DOTA_Item_Build_Early_Game")
+                            {
+                                tempGroup.GroupTitle = "Early Game";
+                            }
+                            if (tempGroup.GroupTitle == "#DOTA_Item_Build_Core_Items")
+                            {
+                                tempGroup.GroupTitle = "Core Items";
+                            }
+                            if (tempGroup.GroupTitle == "#DOTA_Item_Build_Luxury")
+                            {
+                                tempGroup.GroupTitle = "Luxury";
+                            }
+                            Litems.Add(new group(tempGroup.items, tempGroup.GroupTitle));
+                            break;
+                        }
                         continue;
                     }
                 }
+                else
+                {
+
+
+                    if (s.TrimStart().StartsWith("\"author"))
+                    {
+                        Lauthor = s.Split('\"')[s.Split('\"').Length - 2];
+                        continue;
+                    }
+
+                    if (s.TrimStart().StartsWith("\"Title"))
+                    {
+                        string t = s.Split('\"')[s.Split('\"').Length - 2];
+                        Ltitle = s.Split('\"')[s.Split('\"').Length - 2];
+                        continue;
+                    }
+
+                    if (s.TrimStart().StartsWith("\"hero"))
+                    {
+                        Lhero = HeroFetcher.ResloveDotaNameToHero(s.Split('\"')[s.Split('\"').Length - 2].Remove(0, 14));
+                        continue;
+                    }
+
+                    if (s.TrimStart().StartsWith("\"Items"))
+                    {
+                        isItems = true;
+                        continue;
+                    }
+                }
+
                 
-                
-                if (s.TrimStart().StartsWith("\"author"))
-                {
-                    Lauthor = s.Split('\"')[s.Split('\"').Length - 2];
-                    continue;
-                }
-
-                if (s.TrimStart().StartsWith("\"Title"))
-                {
-                    string t = s.Split('\"')[s.Split('\"').Length - 2];
-                    Ltitle = s.Split('\"')[s.Split('\"').Length - 2];
-                    continue;
-                }
-
-                if (s.TrimStart().StartsWith("\"hero"))
-                {
-                    Lhero = HeroFetcher.ResloveDotaNameToHero( s.Split('\"')[s.Split('\"').Length - 2].Remove(0, 14) );
-                    continue;
-                }
-
-                if (s.TrimStart().StartsWith("\"Items"))
-                {
-                    isItems = true;
-                    continue;
-                }
-
-                if (s == "}") //EOF
-                {
-                    break;
-                }
             }
 
             return new build(Lhero, Lauthor, Ltitle, Litems);

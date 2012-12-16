@@ -54,7 +54,6 @@
     <Compile Include="cache\cache.cs" />
     <Compile Include="editor\build.cs" />
     <Compile Include="editor\group.cs" />
-    <Compile Include="editor\item.cs" />
     <Compile Include="editor\SkillBuild.cs" />
     <Compile Include="gui\buildtab.cs">
       <SubType>Component</SubType>

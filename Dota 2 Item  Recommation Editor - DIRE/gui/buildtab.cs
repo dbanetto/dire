@@ -44,9 +44,14 @@ namespace dire.gui
         public BuildTab( group Group)
             : base(Group.GroupTitle)
         {
-            this.group = Group;
-
             init();
+            this.group = Group;
+            for (int i = 0; i < group.items.Count; i++  )
+            {
+                this.AddItem(group.items[i]);
+            }
+
+            
         }
 
         
@@ -55,7 +60,7 @@ namespace dire.gui
         {
             
             this.group = new group();
-            this.group.items = new List<item>();
+            this.group.items = new List<Item>();
             this.group.GroupTitle = GroupName;
 
             init();
@@ -107,7 +112,7 @@ namespace dire.gui
             {
                 foreach (ListViewItem i in ItemsList.SelectedItems)
                 {
-                    this.group.items.Remove(new item(ItemFetcher.AllItems[i.ImageIndex].Name, ItemFetcher.AllItems[i.ImageIndex].DotaName));
+                    this.group.items.Remove(ItemFetcher.AllItems[i.ImageIndex]);
                     ItemsList.Items.Remove(i);
                     cost -= ItemFetcher.AllItems[i.ImageIndex].Cost;
                     main.Build.UpdateCurrentCost();
@@ -117,9 +122,19 @@ namespace dire.gui
 
         public void AddItem(ListViewItem i)
         {
-            this.group.items.Add(new item(ItemFetcher.AllItems[i.ImageIndex].Name, ItemFetcher.AllItems[i.ImageIndex].DotaName));
+            this.group.items.Add(ItemFetcher.AllItems[i.ImageIndex]);
             this.ItemsList.Items.Add(i);
             cost += ItemFetcher.AllItems[i.ImageIndex].Cost;
+
+            main.Build.UpdateCurrentCost();
+
+        }
+
+        public void AddItem(Item i)
+        {
+            //this.group.items.Add(i);
+            this.ItemsList.Items.Add( new ListViewItem(i.Name, i.ImageListIndex));
+            cost += i.Cost;
 
             main.Build.UpdateCurrentCost();
 

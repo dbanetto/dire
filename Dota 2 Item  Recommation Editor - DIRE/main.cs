@@ -77,19 +77,29 @@ namespace dire
             }
                 catch (Exception ex)
              {
-                 MessageBox.Show("Error while loading files.");
+                 MessageBox.Show("Error while loading files. Please verify cache and try again.","",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
 
             //Backup for searching
             backup.AddRange(GListBox1.Items);
-            
-            //Creating Default tabs
-            AddNewBuildtab("Starting Items");
-            AddNewBuildtab("Early Game");
-            AddNewBuildtab("Core");
-            AddNewBuildtab("Situational");
-            AddNewBuildtab("luxary");
 
+            if (tabControl1.TabCount == 0)
+            {
+                //Creating Default tabs
+                AddNewBuildtab("Starting Items");
+                AddNewBuildtab("Early Game");
+                AddNewBuildtab("Core");
+                AddNewBuildtab("Situational");
+                AddNewBuildtab("luxary");
+            }
+            else
+            {
+                foreach (BuildTab b in tabControl1.TabPages)
+                {
+                    b.ItemList.LargeImageList = GListBox1.ImageList;
+                    b.ItemList.SmallImageList = GListBox1.ImageList;
+                }
+            }
             //Change the Picture and text to match hero and build
             Image pic = Image.FromFile(hero.ImagePathSmall);
             this.HeroNameLabel.Text = hero.Name + " - " + title;
@@ -226,7 +236,7 @@ namespace dire
             try
             {
                 BuildTab b = (BuildTab)tabControl1.SelectedTab;
-
+                this.CostLabel.Text = "";
                 if (b.Cost != 0)
                 {
                     this.CostLabel.Text = b.Group.GroupTitle + "'s Total Cost : " + b.Cost;
@@ -286,7 +296,7 @@ namespace dire
                 BuildTab b = (BuildTab)tabControl1.SelectedTab;
                 foreach (ListViewItem i in b.ItemList.SelectedItems)
                 {
-                    b.Group.items.Remove(new item(ItemFetcher.AllItems[i.ImageIndex].Name, ItemFetcher.AllItems[i.ImageIndex].DotaName));
+                    b.Group.items.Remove( ItemFetcher.AllItems[i.ImageIndex]);
                     b.ItemList.Items.Remove(i);
                     b.Cost -= ItemFetcher.AllItems[i.ImageIndex].Cost;
                     main.Build.UpdateCurrentCost();
@@ -308,6 +318,23 @@ namespace dire
             this.title = Build.Title;
             this.hero = Build.Hero;
             this.author = Build.Author;
+
+            //Imageindex
+            int n = 0;
+            try
+            {
+                foreach (Item it in ItemFetcher.AllItems)
+                {
+                    it.ImageListIndex = n;
+                    n++;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error while loading files. Please verify cache and try again.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
 
             Image pic = Image.FromFile(hero.ImagePathSmall);
             this.HeroNameLabel.Text = hero.Name + " - " + title;
