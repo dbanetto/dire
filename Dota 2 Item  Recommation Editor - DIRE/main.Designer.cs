@@ -81,9 +81,10 @@ namespace dire
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.AllowDrop = true;
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.HotTrack = true;
             this.tabControl1.Location = new System.Drawing.Point(222, 66);
             this.tabControl1.Name = "tabControl1";
@@ -92,6 +93,8 @@ namespace dire
             this.tabControl1.TabIndex = 8;
             this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             this.tabControl1.TabIndexChanged += new System.EventHandler(this.tabControl1_TabIndexChanged);
+            this.tabControl1.DragDrop += new System.Windows.Forms.DragEventHandler(this.tabControl1_DragDrop);
+            this.tabControl1.DragEnter += new System.Windows.Forms.DragEventHandler(this.tabControl1_DragEnter);
             // 
             // button1
             // 
@@ -206,8 +209,9 @@ namespace dire
             // 
             // GListBox1
             // 
-            this.GListBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.GListBox1.AllowDrop = true;
+            this.GListBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.GListBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.GListBox1.FormattingEnabled = true;
             this.GListBox1.ImageList = null;
@@ -217,7 +221,10 @@ namespace dire
             this.GListBox1.Size = new System.Drawing.Size(204, 268);
             this.GListBox1.TabIndex = 0;
             this.GListBox1.SelectedIndexChanged += new System.EventHandler(this.GListBox1_SelectedIndexChanged);
+            this.GListBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.GListBox1_DragDrop);
+            this.GListBox1.DragEnter += new System.Windows.Forms.DragEventHandler(this.GListBox1_DragEnter);
             this.GListBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.GListBox1_MouseDoubleClick);
+            this.GListBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GListBox1_MouseDown);
             // 
             // main
             // 

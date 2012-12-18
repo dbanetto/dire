@@ -90,7 +90,7 @@ namespace dire
                 AddNewBuildtab("Early Game");
                 AddNewBuildtab("Core");
                 AddNewBuildtab("Situational");
-                AddNewBuildtab("luxary");
+                AddNewBuildtab("Luxary");
             }
             else
             {
@@ -365,5 +365,60 @@ namespace dire
             b.ItemList.SmallImageList = this.GListBox1.ImageList;
             tabControl1.Controls.Add(b);
         }
+
+        //Drag N Drop functionality
+
+        private void tabControl1_DragEnter(object sender, DragEventArgs e)
+        {
+            //If the dropping type isn't correct, don't show a droppable icon
+            e.Effect =
+                e.Data.GetDataPresent(typeof(GListBoxItem)) ?
+                DragDropEffects.Copy : DragDropEffects.Move;
+        }
+
+        private void tabControl1_DragDrop(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent(typeof(GListBoxItem)))
+                return;
+
+            //A Method like AddItem() would be better
+            GListBoxItem g_item = (GListBoxItem)e.Data.GetData(typeof(GListBoxItem));
+            ListViewItem item = new ListViewItem(g_item.Text, g_item.ImageIndex);
+            BuildTab tab = (BuildTab)this.tabControl1.SelectedTab;
+            tab.AddItem(item);
+        }
+
+
+        private void GListBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            GListBoxItem item = (GListBoxItem)GListBox1.SelectedItem;
+            GListBox1.DoDragDrop(item, DragDropEffects.Copy);
+        }
+
+        private void GListBox1_DragEnter(object sender, DragEventArgs e)
+        {
+            //If the dropping type isn't correct, don't show a droppable icon
+            e.Effect =
+                e.Data.GetDataPresent(typeof(ListView.SelectedIndexCollection)) ?
+                DragDropEffects.Copy : DragDropEffects.Move;
+        }
+
+        private void GListBox1_DragDrop(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent(typeof(ListViewItem)))
+                return;
+
+            // This should be maybe be an RemoveItem() method
+            BuildTab b = (BuildTab)tabControl1.SelectedTab;
+            foreach (ListViewItem i in b.ItemList.SelectedItems)
+            {
+                b.Group.items.Remove(ItemFetcher.AllItems[i.ImageIndex]);
+                b.ItemList.Items.Remove(i);
+                b.Cost -= ItemFetcher.AllItems[i.ImageIndex].Cost;
+                main.Build.UpdateCurrentCost();
+            }
+        }
+
+
     }
 }

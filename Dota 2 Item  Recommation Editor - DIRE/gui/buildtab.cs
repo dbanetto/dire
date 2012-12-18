@@ -84,8 +84,9 @@ namespace dire.gui
 
             ItemsList.Items.Clear();
             ItemsList.GridLines = true;
-            ItemList.ItemSelectionChanged += ItemList_ItemSelectionChanged;
-            ItemList.MouseClick += ItemList_MouseClick;
+            ItemsList.ItemSelectionChanged += ItemList_ItemSelectionChanged;
+            ItemsList.MouseClick += ItemList_MouseClick;
+            ItemsList.ItemDrag += ItemList_ItemDown;
             ItemsList.MouseDoubleClick += new MouseEventHandler(ItemsList_MouseDoubleClick);
 
             this.Controls.Add(ItemsList);
@@ -98,6 +99,11 @@ namespace dire.gui
                 //Change Infobox
                 main.Build.SetInfoBox(ItemFetcher.AllItems[ItemsList.SelectedItems[0].ImageIndex]);
             }
+        }
+
+        void ItemList_ItemDown(Object sender, ItemDragEventArgs e)
+        {
+            ItemsList.DoDragDrop(e.Item, DragDropEffects.Move);
         }
 
         void ItemList_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
