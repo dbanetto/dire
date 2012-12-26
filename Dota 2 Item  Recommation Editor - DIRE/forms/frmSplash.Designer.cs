@@ -1,6 +1,6 @@
 ﻿namespace dire
 {
-    partial class Splash
+    partial class frmSplash
     {
         /// <summary>
         /// Required designer variable.

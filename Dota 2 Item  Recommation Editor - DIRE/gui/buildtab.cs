@@ -69,7 +69,7 @@ namespace dire.gui
         private void init()
         {
             cost = 0;
-            main.Build.UpdateCurrentCost();
+            frmItemPicker.Build.UpdateCurrentCost();
             this.Controls.Add(ItemsList);
             this.Location = new System.Drawing.Point(4, 22);
             this.Size = new System.Drawing.Size(346, 366);
@@ -97,7 +97,7 @@ namespace dire.gui
             if (ItemsList.SelectedItems.Count == 1)
             {
                 //Change Infobox
-                main.Build.SetInfoBox(ItemFetcher.AllItems[ItemsList.SelectedItems[0].ImageIndex]);
+                frmItemPicker.Build.SetInfoBox(ItemFetcher.AllItems[ItemsList.SelectedItems[0].ImageIndex]);
             }
         }
 
@@ -109,7 +109,7 @@ namespace dire.gui
         void ItemList_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             //Change Infobox
-            main.Build.SetInfoBox(ItemFetcher.AllItems[e.Item.ImageIndex]);
+            frmItemPicker.Build.SetInfoBox(ItemFetcher.AllItems[e.Item.ImageIndex]);
         }
 
         void ItemsList_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -121,7 +121,7 @@ namespace dire.gui
                     this.group.items.Remove(ItemFetcher.AllItems[i.ImageIndex]);
                     ItemsList.Items.Remove(i);
                     cost -= ItemFetcher.AllItems[i.ImageIndex].Cost;
-                    main.Build.UpdateCurrentCost();
+                    frmItemPicker.Build.UpdateCurrentCost();
                 }
             }
         }
@@ -132,7 +132,7 @@ namespace dire.gui
             this.ItemsList.Items.Add(i);
             cost += ItemFetcher.AllItems[i.ImageIndex].Cost;
 
-            main.Build.UpdateCurrentCost();
+            frmItemPicker.Build.UpdateCurrentCost();
 
         }
 
@@ -142,7 +142,7 @@ namespace dire.gui
             this.ItemsList.Items.Add( new ListViewItem(i.Name, i.ImageListIndex));
             cost += i.Cost;
 
-            main.Build.UpdateCurrentCost();
+            frmItemPicker.Build.UpdateCurrentCost();
 
         }
 

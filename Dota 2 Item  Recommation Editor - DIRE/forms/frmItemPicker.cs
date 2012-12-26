@@ -16,17 +16,15 @@ using dire.gui;
 using System.Threading;
 namespace dire
 {
-    public partial class main : Form
+    public partial class frmItemPicker : Form
     {
-        public static main Build;
-
-        private bool DragAndDropEnabled = false;
+        public static frmItemPicker Build;
 
         private Hero hero;
         private string author = string.Empty;
         private string title = string.Empty;
-        HeroPicker Caller;
-        public main (string Author, string Title , Hero hero , HeroPicker caller)
+        frmHeroPicker Caller;
+        public frmItemPicker (string Author, string Title , Hero hero , frmHeroPicker caller)
         {
             InitializeComponent();
             Build = this;
@@ -36,7 +34,7 @@ namespace dire
              this.Caller = caller;
         }
 
-        public main(build build, HeroPicker caller)
+        public frmItemPicker(build build, frmHeroPicker caller)
         {
             InitializeComponent();
             Build = this;
@@ -44,7 +42,7 @@ namespace dire
             this.Caller = caller;
         }
 
-        public main(HeroPicker caller)
+        public frmItemPicker(frmHeroPicker caller)
         {
             InitializeComponent();
             Build = this;
@@ -101,9 +99,9 @@ namespace dire
                 //Creating Default tabs
                 AddNewBuildtab("Starting Items");
                 AddNewBuildtab("Early Game");
-                AddNewBuildtab("Core");
+                AddNewBuildtab("Core Items");
                 AddNewBuildtab("Situational");
-                AddNewBuildtab("Luxary");
+                AddNewBuildtab("Luxury");
             }
             else
             {
@@ -114,7 +112,7 @@ namespace dire
                 }
             }
             //Change the Picture and text to match hero and build
-            Image pic = Image.FromFile(hero.ImagePathSmall);
+            Image pic = Image.FromFile(hero.ImagePath);
             this.HeroNameLabel.Text = hero.Name + " - " + title;
             pictureBox1.Image = pic;
 
@@ -205,7 +203,14 @@ namespace dire
             }
 
             dire.editor.build UserBuild = new build(hero, author, title, groups);
-            UserBuild.WriteBuild("default_" + hero.DotaName + ".txt");
+            if (frmSettings.Settings.SaveInDota)
+            {
+                UserBuild.WriteBuild(frmSettings.Settings.DotaPath + "\\dota\\itembuilds\\default_" + hero.DotaName + ".txt", !frmSettings.Settings.DotaPathOverride);
+            }
+            else
+            {
+                UserBuild.WriteBuild("default_" + hero.DotaName + ".txt");
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -314,7 +319,7 @@ namespace dire
                     b.Group.items.Remove( ItemFetcher.AllItems[i.ImageIndex]);
                     b.ItemList.Items.Remove(i);
                     b.Cost -= ItemFetcher.AllItems[i.ImageIndex].Cost;
-                    main.Build.UpdateCurrentCost();
+                    frmItemPicker.Build.UpdateCurrentCost();
                 }
             }
             catch
@@ -351,7 +356,7 @@ namespace dire
             }
 
 
-            Image pic = Image.FromFile(hero.ImagePathSmall);
+            Image pic = Image.FromFile(hero.ImagePath);
             this.HeroNameLabel.Text = hero.Name + " - " + title;
             pictureBox1.Image = pic;
 
@@ -385,7 +390,7 @@ namespace dire
 
         private void tabControl1_DragEnter(object sender, DragEventArgs e)
         {
-            if (DragAndDropEnabled)
+            if (frmSettings.Settings.DragAndDrop)
             {
                 //If the dropping type isn't correct, don't show a droppable icon
                 e.Effect =
@@ -396,7 +401,7 @@ namespace dire
 
         private void tabControl1_DragDrop(object sender, DragEventArgs e)
         {
-            if (DragAndDropEnabled)
+            if (frmSettings.Settings.DragAndDrop)
             {
                 if (!e.Data.GetDataPresent(typeof(GListBoxItem)))
                     return;
@@ -412,7 +417,7 @@ namespace dire
 
         private void GListBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (DragAndDropEnabled)
+            if (frmSettings.Settings.DragAndDrop)
             {
                 GListBoxItem item = (GListBoxItem)GListBox1.SelectedItem;
 
@@ -423,7 +428,7 @@ namespace dire
 
         private void GListBox1_DragEnter(object sender, DragEventArgs e)
         {
-            if (DragAndDropEnabled)
+            if (frmSettings.Settings.DragAndDrop)
             {
                 //If the dropping type isn't correct, don't show a droppable icon
                 e.Effect =
@@ -434,7 +439,7 @@ namespace dire
 
         private void GListBox1_DragDrop(object sender, DragEventArgs e)
         {
-            if (DragAndDropEnabled)
+            if (frmSettings.Settings.DragAndDrop)
             {
                 if (!e.Data.GetDataPresent(typeof(ListViewItem)))
                     return;
@@ -446,9 +451,14 @@ namespace dire
                     b.Group.items.Remove(ItemFetcher.AllItems[i.ImageIndex]);
                     b.ItemList.Items.Remove(i);
                     b.Cost -= ItemFetcher.AllItems[i.ImageIndex].Cost;
-                    main.Build.UpdateCurrentCost();
+                    frmItemPicker.Build.UpdateCurrentCost();
                 }
             }
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmSettings().Show();
         }
 
 

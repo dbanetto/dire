@@ -12,9 +12,9 @@ using dire.net;
 
 namespace dire
 {
-    public partial class Splash : Form
+    public partial class frmSplash : Form
     {
-        public Splash()
+        public frmSplash()
         {
             InitializeComponent();
             

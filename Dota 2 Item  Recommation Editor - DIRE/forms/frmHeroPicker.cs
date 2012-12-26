@@ -10,31 +10,11 @@ using dire.net;
 
 namespace dire
 {
-    public partial class HeroPicker : Form
+    public partial class frmHeroPicker : Form
     {
-        public HeroPicker()
+        public frmHeroPicker()
         {
             InitializeComponent();
-            //ImageList heros = new ImageList();
-
-            //ImageList i = new ImageList();
-            //i.ImageSize = new System.Drawing.Size(32, 18);
-            ////glComboBox1.ItemHeight = 16;
-
-            //int n = 0;
-            //try
-            //{
-            //    foreach (Hero it in HeroFetcher.AllHeros)
-            //    {
-            //        i.Images.Add(it.Name, Image.FromFile("cache\\heros\\" + it.DotaName + "_sm.png"));
-            //        glComboBox1.Items.Add(new dire.gui.GlComboBoxItem(it.Name, n));
-            //        it.ImageListIndex = n;
-            //        n++;
-
-            //    }
-            //}
-            //catch { }
-            //glComboBox1.ImageList = i;
 
             TxtboxAuthor.Text = Environment.UserName;
         }
@@ -50,8 +30,9 @@ namespace dire
         {
             try
             {
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
                 pictureBox1.Size = new System.Drawing.Size(59, 33);
-                pictureBox1.Image = Image.FromFile("cache\\heros\\" + HeroFetcher.AllHeros[glComboBox1.SelectedIndex].DotaName + "_sm.png");
+                pictureBox1.Image = Image.FromFile(HeroFetcher.AllHeros[glComboBox1.SelectedIndex].ImagePath);
 
                 if (autoGenTitle)
                 {
@@ -66,7 +47,7 @@ namespace dire
             try
             {
                
-                main m = new main(TxtboxAuthor.Text, txtBoxTitle.Text, HeroFetcher.AllHeros[glComboBox1.SelectedIndex], this);
+                frmItemPicker m = new frmItemPicker(TxtboxAuthor.Text, txtBoxTitle.Text, HeroFetcher.AllHeros[glComboBox1.SelectedIndex], this);
                 m.Show();
                 this.Visible = false;
             }
@@ -102,7 +83,7 @@ namespace dire
                 {
                     foreach (Hero it in HeroFetcher.AllHeros)
                     {
-                        i.Images.Add(it.Name, Image.FromFile("cache\\heros\\" + it.DotaName + "_sm.png"));
+                        i.Images.Add(it.Name, Image.FromFile(it.ImagePath));
                         glComboBox1.Items.Add(new dire.gui.GlComboBoxItem(it.Name, n));
                         it.ImageListIndex = n;
                         n++;
@@ -125,7 +106,7 @@ namespace dire
             {
                 try
                 {
-                    new main(editor.build.LoadBuild(openFileDialog.FileName), this).Show();
+                    new frmItemPicker(editor.build.LoadBuild(openFileDialog.FileName), this).Show();
                     this.Visible = false;
                 }
                 catch

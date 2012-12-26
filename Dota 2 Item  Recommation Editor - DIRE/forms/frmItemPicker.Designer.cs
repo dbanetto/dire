@@ -2,7 +2,7 @@
 using System.Drawing;
 namespace dire
 {
-    partial class main
+    partial class frmItemPicker
     {
         /// <summary>
         /// Required designer variable.
@@ -47,6 +47,7 @@ namespace dire
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.GListBox1 = new dire.GListBox();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -82,9 +83,9 @@ namespace dire
             // tabControl1
             // 
             this.tabControl1.AllowDrop = true;
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.HotTrack = true;
             this.tabControl1.Location = new System.Drawing.Point(222, 66);
             this.tabControl1.Name = "tabControl1";
@@ -133,7 +134,8 @@ namespace dire
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.createBuildToolStripMenuItem});
+            this.createBuildToolStripMenuItem,
+            this.optionsToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
@@ -141,7 +143,7 @@ namespace dire
             // createBuildToolStripMenuItem
             // 
             this.createBuildToolStripMenuItem.Name = "createBuildToolStripMenuItem";
-            this.createBuildToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.createBuildToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.createBuildToolStripMenuItem.Text = "Create Build";
             this.createBuildToolStripMenuItem.Click += new System.EventHandler(this.createBuildToolStripMenuItem_Click);
             // 
@@ -210,8 +212,8 @@ namespace dire
             // GListBox1
             // 
             this.GListBox1.AllowDrop = true;
-            this.GListBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.GListBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.GListBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.GListBox1.FormattingEnabled = true;
             this.GListBox1.ImageList = null;
@@ -226,7 +228,14 @@ namespace dire
             this.GListBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.GListBox1_MouseDoubleClick);
             this.GListBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GListBox1_MouseDown);
             // 
-            // main
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.optionsToolStripMenuItem.Text = "Options";
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
+            // 
+            // frmItemPicker
             // 
             this.ClientSize = new System.Drawing.Size(588, 522);
             this.Controls.Add(this.button4);
@@ -243,7 +252,7 @@ namespace dire
             this.Controls.Add(this.GListBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "main";
+            this.Name = "frmItemPicker";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.main_FormClosed);
             this.Load += new System.EventHandler(this.main_Load);
             this.menuStrip1.ResumeLayout(false);
@@ -273,6 +282,7 @@ namespace dire
         private Label HeroNameLabel;
         private Button button3;
         private Button button4;
+        private ToolStripMenuItem optionsToolStripMenuItem;
     }
 
     #region GLListBox

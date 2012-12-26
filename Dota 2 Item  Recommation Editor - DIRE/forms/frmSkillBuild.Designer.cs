@@ -1,6 +1,6 @@
 ﻿namespace dire
 {
-    partial class SkillBuild
+    partial class frmSkillBuild
     {
         /// <summary>
         /// Required designer variable.

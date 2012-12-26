@@ -69,7 +69,9 @@ namespace dire.net
              }
              else
              {
+                 //Default black list
                  File.WriteAllText("cache/blacklist.txt", "greevil_whistle\ngreevil_whistle_toggle\npresent\nwinter_cake\nwinter_coco\nwinter_cookie\nwinter_greevil_chewy\nwinter_greevil_garbage\nwinter_greevil_treat\nwinter_ham\nwinter_kringle\nwinter_mushroom\nwinter_skates\nwinter_stocking\nhalloween_candy_corn\nhalloween_rapier\nmystery_hook\nmystery_arrow\nmystery_missile\nmystery_toss\nmystery_vacuum");
+                 LoadBlackList("cache/blacklist.txt");
              }
 
              string jsondata = string.Empty;

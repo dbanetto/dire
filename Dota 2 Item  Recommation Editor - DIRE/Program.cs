@@ -36,7 +36,7 @@ namespace dire
                 }
             }
 
-            splashscreen = new Splash();
+            splashscreen = new frmSplash();
 
             Thread t;
             if (forceUpdate)
@@ -66,12 +66,12 @@ namespace dire
             t.Join();
             splashscreen.Close();
 #if DEBUG
-            Application.Run(new HeroPicker());
+            Application.Run(new frmHeroPicker());
 #else
             Application.Run(new HeroPicker());
 #endif
         }
-        static Splash splashscreen;
+        static frmSplash splashscreen;
         
     }
 }

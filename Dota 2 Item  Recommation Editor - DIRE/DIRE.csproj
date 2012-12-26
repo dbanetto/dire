@@ -62,44 +62,50 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="gui\TabDragger.cs" />
-    <Compile Include="HeroPicker.cs">
+    <Compile Include="forms\frmHeroPicker.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HeroPicker.Designer.cs">
-      <DependentUpon>HeroPicker.cs</DependentUpon>
+    <Compile Include="forms\frmHeroPicker.Designer.cs">
+      <DependentUpon>frmHeroPicker.cs</DependentUpon>
     </Compile>
     <Compile Include="net\AbilitiesFetcher.cs" />
     <Compile Include="net\HeroFetcther.cs" />
     <Compile Include="net\IconFetcher.cs" />
-    <Compile Include="main.cs">
+    <Compile Include="forms\frmItemPicker.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="main.Designer.cs">
-      <DependentUpon>main.cs</DependentUpon>
+    <Compile Include="forms\frmItemPicker.Designer.cs">
+      <DependentUpon>frmItemPicker.cs</DependentUpon>
     </Compile>
     <Compile Include="net\ItemFetcher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SkillBuild.cs">
+    <Compile Include="forms\frmSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SkillBuild.Designer.cs">
-      <DependentUpon>SkillBuild.cs</DependentUpon>
+    <Compile Include="forms\frmSettings.Designer.cs">
+      <DependentUpon>frmSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Splash.cs">
+    <Compile Include="forms\frmSkillBuild.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Splash.Designer.cs">
-      <DependentUpon>Splash.cs</DependentUpon>
+    <Compile Include="forms\frmSkillBuild.Designer.cs">
+      <DependentUpon>frmSkillBuild.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\frmSplash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\frmSplash.Designer.cs">
+      <DependentUpon>frmSplash.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="gui\GLComboBox.resx">
       <DependentUpon>GLComboBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HeroPicker.resx">
-      <DependentUpon>HeroPicker.cs</DependentUpon>
+    <EmbeddedResource Include="forms\frmHeroPicker.resx">
+      <DependentUpon>frmHeroPicker.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="main.resx">
-      <DependentUpon>main.cs</DependentUpon>
+    <EmbeddedResource Include="forms\frmItemPicker.resx">
+      <DependentUpon>frmItemPicker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -111,11 +117,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="SkillBuild.resx">
-      <DependentUpon>SkillBuild.cs</DependentUpon>
+    <EmbeddedResource Include="forms\frmSettings.resx">
+      <DependentUpon>frmSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Splash.resx">
-      <DependentUpon>Splash.cs</DependentUpon>
+    <EmbeddedResource Include="forms\frmSkillBuild.resx">
+      <DependentUpon>frmSkillBuild.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\frmSplash.resx">
+      <DependentUpon>frmSplash.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

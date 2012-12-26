@@ -1,6 +1,6 @@
 ﻿namespace dire
 {
-    partial class HeroPicker
+    partial class frmHeroPicker
     {
         /// <summary>
         /// Required designer variable.
@@ -145,7 +145,7 @@
             this.loadBuildToolStripMenuItem.Text = "Load Build";
             this.loadBuildToolStripMenuItem.Click += new System.EventHandler(this.loadBuildToolStripMenuItem_Click);
             // 
-            // HeroPicker
+            // frmHeroPicker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -163,7 +163,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "HeroPicker";
+            this.Name = "frmHeroPicker";
             this.Text = "DIRE - Hero Picker";
             this.Load += new System.EventHandler(this.HeroPicker_Load);
             this.VisibleChanged += new System.EventHandler(this.HeroPicker_VisibleChanged);

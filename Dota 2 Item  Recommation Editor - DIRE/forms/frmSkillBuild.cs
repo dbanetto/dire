@@ -10,11 +10,11 @@ using dire.net;
 
 namespace dire
 {
-    public partial class SkillBuild : Form
+    public partial class frmSkillBuild : Form
     {
         private Hero hero = null;
 
-        public SkillBuild()
+        public frmSkillBuild()
         {
             InitializeComponent();
 
@@ -25,7 +25,7 @@ namespace dire
             //hero = HeroFetcher.ResloveDotaNameToHero("furion");
         }
 
-        public SkillBuild(Hero Hero)
+        public frmSkillBuild(Hero Hero)
         {
             InitializeComponent();
             this.hero = Hero;
@@ -39,7 +39,7 @@ namespace dire
         private void SkillBuild_Load(object sender, EventArgs e)
         {
 
-            picBoxHero.Image = Image.FromFile(hero.ImagePathLarge);
+            picBoxHero.Image = Image.FromFile(hero.ImagePathVert);
 
             label1.Text = hero.Name;
 

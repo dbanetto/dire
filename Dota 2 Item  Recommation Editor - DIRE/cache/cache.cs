@@ -152,13 +152,13 @@ namespace dire.cache
                 }
                 try
                 {
-                    Image.FromFile(i.Value.ImagePathSmall);
+                    Image.FromFile(i.Value.ImagePathVert);
                 }
                 catch
                 {
-                    if (File.Exists(i.Value.ImagePathSmall))
+                    if (File.Exists(i.Value.ImagePathVert))
                     {
-                        File.Delete(i.Value.ImagePathSmall);
+                        File.Delete(i.Value.ImagePathVert);
                     }
                 }
             }

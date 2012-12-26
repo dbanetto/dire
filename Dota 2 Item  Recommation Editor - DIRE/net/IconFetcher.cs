@@ -15,10 +15,9 @@ namespace dire.net
 
 
         static string abilities_end =       "_hp2.png";
-        static string abilities_end_small = "_hp1.png";
         
         static string hero_end =       "_hphover.png";
-        static string hero_end_small = "_sb.png";
+        static string hero_end_vert = "_vert.jpg";
         
         static string item_end = "_lg.png";
 
@@ -32,7 +31,7 @@ namespace dire.net
         public static void downloadHeroIcon(string hero, string path)
         {
             webClient.DownloadFile(new Uri(hero_base + hero + hero_end), path);
-            webClient.DownloadFile(new Uri(hero_base + hero + hero_end_small), path.Split('.')[0] + "_sm." + path.Split('.')[1]); //adds a _sm between file name and .png
+            webClient.DownloadFile(new Uri(hero_base + hero + hero_end_vert), path.Split('.')[0] + "_vert." + path.Split('.')[1]); //adds a _sm between file name and .jpg
         }
 
         public static void downloadAbilityIcon(string ability, string path)
