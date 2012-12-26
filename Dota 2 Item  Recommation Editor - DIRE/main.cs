@@ -20,6 +20,8 @@ namespace dire
     {
         public static main Build;
 
+        private bool DragAndDropEnabled = false;
+
         private Hero hero;
         private string author = string.Empty;
         private string title = string.Empty;
@@ -53,12 +55,19 @@ namespace dire
         TabDragger tabDragger;
         private void main_Load(object sender, EventArgs e)
         {
-           
+           //Generate objects
+            ItemFetcher.GenerateObjects();
+
+            //Custom items (soul ring recipe etc)
+            if (File.Exists("cache/items.custom.json"))
+            {
+                ItemFetcher.GenerateObjects("cache/items.custom.json", true);
+            }
+
             //Hide while the startup happens
             this.Visible = false;
             backup = new ListBox.ObjectCollection(new ListBox());
 
-            //splashscreen.ChangeStatusText("Loading Items icon list");
             GListBox1.ImageList = new ImageList();
             GListBox1.ImageList.ImageSize = new System.Drawing.Size(32, 24);
             
@@ -68,7 +77,11 @@ namespace dire
                 {
             foreach (Item it in ItemFetcher.AllItems)
             {
-                    GListBox1.ImageList.Images.Add(it.Name, Image.FromFile("cache\\items\\" + it.DotaName + ".png"));
+                try { GListBox1.ImageList.Images.Add(it.Name, Image.FromFile("cache\\items\\" + it.DotaName + ".png")); }
+                catch
+                {
+                    GListBox1.ImageList.Images.Add(it.Name, Image.FromFile("cache\\items\\" + it.img ));
+                }
                     GListBox1.Items.Add(new GListBoxItem(it.Name, n));
                     it.ImageListIndex = n;
                     n++;
@@ -227,7 +240,9 @@ namespace dire
                 richTextBox1.Text += "\n" + "Discription: " + i.Discription.Replace("<br />", "\n");
             }
 
-            
+#if DEBUG
+             richTextBox1.Text += "\n" + "Dota Name: " + i.DotaName;
+#endif
 
         }
 
@@ -370,52 +385,69 @@ namespace dire
 
         private void tabControl1_DragEnter(object sender, DragEventArgs e)
         {
-            //If the dropping type isn't correct, don't show a droppable icon
-            e.Effect =
-                e.Data.GetDataPresent(typeof(GListBoxItem)) ?
-                DragDropEffects.Copy : DragDropEffects.Move;
+            if (DragAndDropEnabled)
+            {
+                //If the dropping type isn't correct, don't show a droppable icon
+                e.Effect =
+                    e.Data.GetDataPresent(typeof(GListBoxItem)) ?
+                    DragDropEffects.Copy : DragDropEffects.Move;
+            }
         }
 
         private void tabControl1_DragDrop(object sender, DragEventArgs e)
         {
-            if (!e.Data.GetDataPresent(typeof(GListBoxItem)))
-                return;
+            if (DragAndDropEnabled)
+            {
+                if (!e.Data.GetDataPresent(typeof(GListBoxItem)))
+                    return;
 
-            //A Method like AddItem() would be better
-            GListBoxItem g_item = (GListBoxItem)e.Data.GetData(typeof(GListBoxItem));
-            ListViewItem item = new ListViewItem(g_item.Text, g_item.ImageIndex);
-            BuildTab tab = (BuildTab)this.tabControl1.SelectedTab;
-            tab.AddItem(item);
+                //A Method like AddItem() would be better
+                GListBoxItem g_item = (GListBoxItem)e.Data.GetData(typeof(GListBoxItem));
+                ListViewItem item = new ListViewItem(g_item.Text, g_item.ImageIndex);
+                BuildTab tab = (BuildTab)this.tabControl1.SelectedTab;
+                tab.AddItem(item);
+            }
         }
 
 
         private void GListBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            GListBoxItem item = (GListBoxItem)GListBox1.SelectedItem;
-            GListBox1.DoDragDrop(item, DragDropEffects.Copy);
+            if (DragAndDropEnabled)
+            {
+                GListBoxItem item = (GListBoxItem)GListBox1.SelectedItem;
+
+                GListBox1.DoDragDrop(item, DragDropEffects.Copy);
+            }
+            
         }
 
         private void GListBox1_DragEnter(object sender, DragEventArgs e)
         {
-            //If the dropping type isn't correct, don't show a droppable icon
-            e.Effect =
-                e.Data.GetDataPresent(typeof(ListView.SelectedIndexCollection)) ?
-                DragDropEffects.Copy : DragDropEffects.Move;
+            if (DragAndDropEnabled)
+            {
+                //If the dropping type isn't correct, don't show a droppable icon
+                e.Effect =
+                    e.Data.GetDataPresent(typeof(ListView.SelectedIndexCollection)) ?
+                    DragDropEffects.Copy : DragDropEffects.Move;
+            }
         }
 
         private void GListBox1_DragDrop(object sender, DragEventArgs e)
         {
-            if (!e.Data.GetDataPresent(typeof(ListViewItem)))
-                return;
-
-            // This should be maybe be an RemoveItem() method
-            BuildTab b = (BuildTab)tabControl1.SelectedTab;
-            foreach (ListViewItem i in b.ItemList.SelectedItems)
+            if (DragAndDropEnabled)
             {
-                b.Group.items.Remove(ItemFetcher.AllItems[i.ImageIndex]);
-                b.ItemList.Items.Remove(i);
-                b.Cost -= ItemFetcher.AllItems[i.ImageIndex].Cost;
-                main.Build.UpdateCurrentCost();
+                if (!e.Data.GetDataPresent(typeof(ListViewItem)))
+                    return;
+
+                // This should be maybe be an RemoveItem() method
+                BuildTab b = (BuildTab)tabControl1.SelectedTab;
+                foreach (ListViewItem i in b.ItemList.SelectedItems)
+                {
+                    b.Group.items.Remove(ItemFetcher.AllItems[i.ImageIndex]);
+                    b.ItemList.Items.Remove(i);
+                    b.Cost -= ItemFetcher.AllItems[i.ImageIndex].Cost;
+                    main.Build.UpdateCurrentCost();
+                }
             }
         }
 

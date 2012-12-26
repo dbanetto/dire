@@ -69,6 +69,7 @@ namespace dire.net
                     h.Add(i.Value);
 
                 }
+                h = h.OrderBy(x => x.Name).ToList();
                 AllHeros = h.ToArray();
         }
         

@@ -13,6 +13,13 @@ namespace dire.net
         static string url = @"http://www.dota2.com/jsfeed/itemdata?&l=english"; //Url for json info
         public static Item[] AllItems;
 
+        static List<string> blacklist = new List<string>();
+
+        public static void LoadBlackList(string path)
+        {
+            blacklist.AddRange(File.ReadAllLines(path));
+        }
+
 
          public static void getAllIcons (bool ForceUpdate = false) {
 
@@ -52,17 +59,44 @@ namespace dire.net
 
          public static void GenerateObjects()
          {
-             string jsondata = string.Empty;
-             jsondata = File.ReadAllText("cache/items.json");
-
-                List<Item> items = new List<Item>();
-                var j = JsonConvert.DeserializeObject<Dictionary<string,Item>>(jsondata);
-                foreach (var i in j) {
-                    i.Value.DotaName = i.Key;
-                    items.Add(i.Value);
-                }
-                AllItems = items.ToArray();
+             GenerateObjects("cache/items.json");
         }
+         public static void GenerateObjects(string JsonFilePath , bool AddToList = false)
+         {
+             if (File.Exists("cache/blacklist.txt"))
+             {
+                 LoadBlackList("cache/blacklist.txt");
+             }
+             else
+             {
+                 File.WriteAllText("cache/blacklist.txt", "greevil_whistle\ngreevil_whistle_toggle\npresent\nwinter_cake\nwinter_coco\nwinter_cookie\nwinter_greevil_chewy\nwinter_greevil_garbage\nwinter_greevil_treat\nwinter_ham\nwinter_kringle\nwinter_mushroom\nwinter_skates\nwinter_stocking\nhalloween_candy_corn\nhalloween_rapier\nmystery_hook\nmystery_arrow\nmystery_missile\nmystery_toss\nmystery_vacuum");
+             }
+
+             string jsondata = string.Empty;
+             jsondata = File.ReadAllText(JsonFilePath);
+
+             List<Item> items = new List<Item>();
+             var j = JsonConvert.DeserializeObject<Dictionary<string, Item>>(jsondata);
+             foreach (var i in j)
+             {
+                 if (!blacklist.Contains(i.Key))
+                 {
+                     i.Value.DotaName = i.Key;
+                     items.Add(i.Value);
+                 }
+             }
+
+             if (!AddToList)
+             {
+                 items = items.OrderBy(x => x.Name).ToList();
+                 AllItems = items.ToArray();
+             } else
+             {
+                 items.AddRange(AllItems);
+                 items = items.OrderBy(x => x.Name).ToList();
+                 AllItems = items.ToArray();
+             }
+         }
 
         public static string ResloveDotaNameToName (string DotaName) {
             foreach (Item i in AllItems)
