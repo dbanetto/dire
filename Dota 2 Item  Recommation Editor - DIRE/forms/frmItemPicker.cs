@@ -115,7 +115,7 @@ namespace dire
             Image pic = Image.FromFile(hero.ImagePath);
             this.HeroNameLabel.Text = hero.Name + " - " + title;
             pictureBox1.Image = pic;
-
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             //Enable Tad dragger
             tabDragger = new TabDragger(tabControl1, TabDragBehavior.TabDragArrange);
 
@@ -459,6 +459,11 @@ namespace dire
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new frmSettings().Show();
+        }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmAbout().Show();
         }
 
 

@@ -39,6 +39,7 @@ namespace dire
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createBuildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -47,7 +48,6 @@ namespace dire
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.GListBox1 = new dire.GListBox();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -143,15 +143,23 @@ namespace dire
             // createBuildToolStripMenuItem
             // 
             this.createBuildToolStripMenuItem.Name = "createBuildToolStripMenuItem";
-            this.createBuildToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.createBuildToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.createBuildToolStripMenuItem.Text = "Create Build";
             this.createBuildToolStripMenuItem.Click += new System.EventHandler(this.createBuildToolStripMenuItem_Click);
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.optionsToolStripMenuItem.Text = "Options";
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "&Help";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.helpToolStripMenuItem.Text = "&About";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -227,13 +235,6 @@ namespace dire
             this.GListBox1.DragEnter += new System.Windows.Forms.DragEventHandler(this.GListBox1_DragEnter);
             this.GListBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.GListBox1_MouseDoubleClick);
             this.GListBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GListBox1_MouseDown);
-            // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.optionsToolStripMenuItem.Text = "Options";
-            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // frmItemPicker
             // 

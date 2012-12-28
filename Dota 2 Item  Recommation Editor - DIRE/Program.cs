@@ -18,6 +18,15 @@ namespace dire
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            try
+            {
+                frmSettings.LoadSettings("cache/settings.json",null);
+            }
+            catch
+            {
+                frmSettings.Settings = new Setting();
+            }
+
             bool forceUpdate = false;
             bool UpdateVerifyCache = false;
             foreach (string str in args)
@@ -66,9 +75,9 @@ namespace dire
             t.Join();
             splashscreen.Close();
 #if DEBUG
-            Application.Run(new frmHeroPicker());
+            Application.Run(new frmSkillBuild());
 #else
-            Application.Run(new HeroPicker());
+            Application.Run(new frmHeroPicker());
 #endif
         }
         static frmSplash splashscreen;

@@ -111,6 +111,6 @@ namespace dire.net
 
         public string ImagePath { get { return "cache/heros/" + DotaName + ".png"; } }
         public string ImagePathLarge { get { return "cache/heros/" + DotaName + ".png"; } }
-        public string ImagePathVert { get { return "cache/heros/" + DotaName + "_vert.jpg"; } } 
+        public string ImagePathVert { get { return "cache/heros/" + DotaName + "_vert.png"; } } 
     }
 }

@@ -82,6 +82,13 @@ namespace dire
             this.checkBox1.Checked = Settings.DotaPathOverride;
         }
 
+        public static void LoadSettings(string path, object n = null)
+        {
+            string jsondata = string.Empty;
+            jsondata = File.ReadAllText(path);
+            Settings = JsonConvert.DeserializeObject<Setting>(jsondata);
+        }
+
 
         //public static void LoadSettings (string path) {
         //    string jsondata = string.Empty;

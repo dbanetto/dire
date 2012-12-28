@@ -136,6 +136,9 @@
             this.Controls.Add(this.groupFolderSettings);
             this.Controls.Add(this.checkDotaFolder);
             this.Controls.Add(this.checkDragDrop);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmSettings";
             this.Text = "DIRE - Settings";
             this.Load += new System.EventHandler(this.Settings_Load);
